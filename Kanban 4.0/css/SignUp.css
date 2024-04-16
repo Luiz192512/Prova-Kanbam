@@ -7,6 +7,10 @@
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
+.botaoParaLogin{
+  color: white;
+  text-decoration: none;
+}
     .signup-form {
         width: 35vh;
         background-color: #fff;

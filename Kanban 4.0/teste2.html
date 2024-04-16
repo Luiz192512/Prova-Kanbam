@@ -1,44 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trello Example</title>
+    <style>
+        #board {
+            width: 500px;
+            height: 500px;
+            border: 1px solid black;
+            padding: 10px;
+        }
+    </style>
 </head>
 <body>
+    <div id="board"></div>
 
-<h2>Login</h2>
-<form id="loginForm">
-  <label for="loginUsername">Username:</label>
-  <input type="text" id="loginUsername" required><br>
-  <label for="loginPassword">Password:</label>
-  <input type="password" id="loginPassword" required><br>
-  <button type="submit">Login</button>
-</form>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Replace with your Trello API key and token
+            const apiKey = "^[0-9a-fA-F]{24}$";
+            const apiToken = "your-api-token";
 
-<p>Don't have an account yet? <a href="signup.html">Sign up here</a>.</p>
+            // Get a board by its name
+            const boardName = "Your Board Name";
+            const url = `https://api.trello.com/1/boards/?key=${apiKey}&token=${apiToken}&name=${boardName}`;
 
-<script>
-  // Função para lidar com o login
-  function login() {
-    var username = document.getElementById('loginUsername').value;
-    var password = document.getElementById('loginPassword').value;
-    var storedPassword = localStorage.getItem(username);
-    if (password === storedPassword) {
-      alert('Login bem-sucedido!');
-      // Aqui você pode redirecionar o usuário para outra página ou executar outra ação
-    } else {
-      alert('Credenciais inválidas. Tente novamente.');
-    }
-    document.getElementById('loginForm').reset();
-  }
+            $.getJSON(url, function (data) {
+                const boardId = data[0].id;
+                const boardUrl = `https://api.trello.com/1/boards/${boardId}/lists?key=${apiKey}&token=${apiToken}`;
 
-  // Adiciona o event listener para o formulário de login
-  document.getElementById('loginForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Impede o envio do formulário
-    login();
-  });
-</script>
+                // Get the first list from the board
+                $.getJSON(boardUrl, function (lists) {
+                    const listId = lists[0].id;
+                    const cardUrl = `https://api.trello.com/1/lists/${listId}/cards?key=${apiKey}&token=${apiToken}`;
 
+                    // Get the first card from the list
+                    $.getJSON(cardUrl, function (cards) {
+                        const cardName = cards[0].name;
+                        $("#board").text(`The first card in the first list is: ${cardName}`);
+                    });
+                });
+            });
+        });
+    </script>
 </body>
 </html>

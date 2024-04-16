@@ -1,14 +1,11 @@
-  // Função para lidar com o cadastro
-  function signUp() {
-    var username = document.getElementById('signupUsername').value;
-    var password = document.getElementById('signupPassword').value;
-    localStorage.setItem(username, password);
-    alert('Cadastro realizado com sucesso!');
-    document.getElementById('signupForm').reset();
-  }
+document.getElementById('signupForm').addEventListener('submit', function(event) {
+  event.preventDefault();
 
-  // Adiciona o event listener para o formulário de sign up
-  document.getElementById('signupForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Impede o envio do formulário
-    signUp();
-  });
+  const email = document.getElementById('signupEmail').value;
+  const password = document.getElementById('signupPassword').value;
+
+  localStorage.setItem('userEmail', email);
+  localStorage.setItem('userPassword', password);
+
+  alert('Account created successfully!');
+});

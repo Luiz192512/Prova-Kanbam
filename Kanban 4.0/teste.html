@@ -3,22 +3,47 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sign Up</title>
+<title>Sign Up & Login</title>
 </head>
 <body>
 
-<h2>Sign Up</h2>
-<form id="signupForm">
-  <label for="signupUsername">Username:</label>
-  <input type="text" id="signupUsername" required><br>
-  <label for="signupPassword">Password:</label>
-  <input type="password" id="signupPassword" required><br>
-  <button type="submit">Sign Up</button>
-</form>
+<div id="signupContainer">
+  <h2>Sign Up</h2>
+  <form id="signupForm">
+    <label for="signupUsername">Username:</label>
+    <input type="text" id="signupUsername" required><br>
+    <label for="signupPassword">Password:</label>
+    <input type="password" id="signupPassword" required><br>
+    <button type="submit">Sign Up</button>
+  </form>
+  <p>Already have an account? <a href="#" id="showLoginForm">Log in here</a>.</p>
+</div>
 
-<p>Already have an account? <a href="login.html">Log in here</a>.</p>
+<div id="loginContainer" style="display: none;">
+  <h2>Login</h2>
+  <form id="loginForm">
+    <label for="loginUsername">Username:</label>
+    <input type="text" id="loginUsername" required><br>
+    <label for="loginPassword">Password:</label>
+    <input type="password" id="loginPassword" required><br>
+    <button type="submit">Login</button>
+  </form>
+  <p>Don't have an account yet? <a href="#" id="showSignupForm">Sign up here</a>.</p>
+</div>
 
 <script>
+  // Função para mostrar o formulário de sign up e ocultar o de login
+  function showSignupForm() {
+    document.getElementById('signupContainer').style.display = 'block';
+    document.getElementById('loginContainer').style.display = 'none';
+  }
+
+  // Função para mostrar o formulário de login e ocultar o de sign up
+  function showLoginForm() {
+    document.getElementById('signupContainer').style.display = 'none';
+    document.getElementById('loginContainer').style.display = 'block';
+  }
+
   // Função para lidar com o cadastro
   function signUp() {
     var username = document.getElementById('signupUsername').value;
@@ -28,11 +53,44 @@
     document.getElementById('signupForm').reset();
   }
 
-  // Adiciona o event listener para o formulário de sign up
+  // Função para lidar com o login
+  function login() {
+    var username = document.getElementById('loginUsername').value;
+    var password = document.getElementById('loginPassword').value;
+    var storedPassword = localStorage.getItem(username);
+    if (password === storedPassword) {
+      alert('Login bem-sucedido!');
+      // Aqui você pode redirecionar o usuário para outra página ou executar outra ação
+    } else {
+      alert('Credenciais inválidas. Tente novamente.');
+    }
+    document.getElementById('loginForm').reset();
+  }
+
+  // Adiciona os event listeners para os links de alternância entre os formulários
+  document.getElementById('showLoginForm').addEventListener('click', function(event) {
+    event.preventDefault(); // Impede o comportamento padrão do link
+    showLoginForm();
+  });
+
+  document.getElementById('showSignupForm').addEventListener('click', function(event) {
+    event.preventDefault(); // Impede o comportamento padrão do link
+    showSignupForm();
+  });
+
+  // Adiciona os event listeners para os formulários
   document.getElementById('signupForm').addEventListener('submit', function(event) {
     event.preventDefault(); // Impede o envio do formulário
     signUp();
   });
+
+  document.getElementById('loginForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Impede o envio do formulário
+    login();
+  });
+
+  // Por padrão, exibe o formulário de sign up
+  showSignupForm();
 </script>
 
 </body>
