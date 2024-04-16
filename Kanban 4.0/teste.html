@@ -1,95 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login & Sign Up</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign Up</title>
 </head>
 <body>
 
-<header>
-  <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
-    <div class="container-fluid">
-      <div class="home">
-        <a class="navbar-brand" href="#"><img src="Img/Logo2-removebg-preview.png" alt="Logo" width="60px" height="60px" id="logo"></a>
-      </div>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarColor02">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <ul class="nav justify-content-end">
-            <li class="nav-item">
-              <a class="nav-link" href="Sign Up.html">Sign Up</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="Login.html">Login</a>
-            </li>
-          </ul>
-        </ul>
-      </div>
-    </div>
-  </nav>
-</header>
+<h2>Sign Up</h2>
+<form id="signupForm">
+  <label for="signupUsername">Username:</label>
+  <input type="text" id="signupUsername" required><br>
+  <label for="signupPassword">Password:</label>
+  <input type="password" id="signupPassword" required><br>
+  <button type="submit">Sign Up</button>
+</form>
 
-<div id="signup-form" style="display:none;">
-  <h2>Sign Up</h2>
-  <input type="text" id="signup-email" placeholder="email"><br>
-  <input type="password" id="signup-password" placeholder="Password"><br>
-  <button onclick="signup()">Sign Up</button>
-</div>
-
-<div id="login-form" style="display:none;">
-  <h2>Login</h2>
-  <input type="text" id="login-email" placeholder="email"><br>
-  <input type="password" id="login-password" placeholder="Password"><br>
-  <button onclick="login()">Login</button>
-</div>
-
-<div id="welcome-msg" style="display:none;">
-  <h2>Welcome <span id="user-welcome"></span>!</h2>
-  <button onclick="logout()">Logout</button>
-</div>
+<p>Already have an account? <a href="login.html">Log in here</a>.</p>
 
 <script>
-  // Placeholder for user data (can be replaced with a database)
-  var users = [];
-
-  // Function to sign up
-  function signup() {
-    var email = document.getElementById("signup-email").value;
-    var password = document.getElementById("signup-password").value;
-
-    users.push({ email: email, password: password });
-
-    alert("Sign up successful!");
+  // Função para lidar com o cadastro
+  function signUp() {
+    var username = document.getElementById('signupUsername').value;
+    var password = document.getElementById('signupPassword').value;
+    localStorage.setItem(username, password);
+    alert('Cadastro realizado com sucesso!');
+    document.getElementById('signupForm').reset();
   }
 
-  // Function to login
-  function login() {
-    var email = document.getElementById("login-email").value;
-    var password = document.getElementById("login-password").value;
-
-    var user = users.find(function(u) {
-      return u.email === email && u.password === password;
-    });
-
-    if (user) {
-      document.getElementById("user-welcome").innerText = user.email;
-      document.getElementById("login-form").style.display = "none";
-      document.getElementById("welcome-msg").style.display = "block";
-    } else {
-      alert("Invalid email or password");
-    }
-  }
-
-  // Function to logout
-  function logout() {
-    document.getElementById("login-email").value = "";
-    document.getElementById("login-password").value = "";
-    document.getElementById("login-form").style.display = "block";
-    document.getElementById("welcome-msg").style.display = "none";
-  }
+  // Adiciona o event listener para o formulário de sign up
+  document.getElementById('signupForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Impede o envio do formulário
+    signUp();
+  });
 </script>
 
 </body>
