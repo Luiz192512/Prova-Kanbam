@@ -6,7 +6,7 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
   var loginPassword = document.getElementById('loginPassword').value;
   if (email === loginEmail && password === loginPassword) {
     // Authentication successful
-    window.location.href = 'Criar-Kanban.html';
+    window.location.href = 'MeusKanban.html';
   } else {
     // Authentication failed
     alert('Invalid email or password');
