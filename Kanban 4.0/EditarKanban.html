@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Create and Save File</title>
+  <script>
+    function createFile() {
+      const title = document.getElementById("titleInput").value;
+      const content = "This is the content of the file.";
+      const blob = new Blob([content], {type: "text/plain;charset=utf-8"});
+      saveAs(blob, title + ".html");
+    }
+
+    function saveAs(blob, fileName) {
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = fileName;
+      link.click();
+    }
+  </script>
+</head>
+<body>
+  <h1>Create and Save File</h1>
+  <input type="text" id="titleInput" placeholder="Enter file title" />
+  <button onclick="createFile()">Create File</button>
+</body>
+</html>

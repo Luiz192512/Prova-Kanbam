@@ -21,6 +21,11 @@
         display: none;
         }
     }
+    @media (min-width: 700px){
+      .navbar-expand-lg .navbar-nav {
+          flex-direction: row;
+        }
+      }
     
     ul {
         overflow: hidden;

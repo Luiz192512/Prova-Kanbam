@@ -8,6 +8,10 @@
     font-family: 'Poppins', sans-serif;
 }
 
+h1{
+  
+}
+
 .btn-outline-success{
     color: white;
     border-color: rgb(255, 255, 255);
@@ -75,3 +79,130 @@
     color: white;
     text-decoration: none;
   }
+
+  /* Note that you only needs to edit the config to customize the button! */
+
+.plusButton {
+  /* Config start */
+  --plus_sideLength: 2.1rem;
+  --plus_topRightTriangleSideLength: 0rem;
+  /* Config end */
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  width: var(--plus_sideLength);
+  height: var(--plus_sideLength);
+  background-color: #ffffff;
+  overflow: hidden;
+  margin-right: 10px;
+  border-radius: 7px;
+}
+
+.plusButton::before {
+  position: absolute;
+  content: "";
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-width: 0 var(--plus_topRightTriangleSideLength) var(--plus_topRightTriangleSideLength) 0;
+  border-style: solid;
+  border-color: transparent rgb(0, 173, 0) transparent transparent;
+  transition-timing-function: ease-in-out;
+  transition-duration: 0.2s;
+}
+
+.plusButton:hover {
+  cursor: pointer;
+}
+
+.plusButton:hover::before {
+  --plus_topRightTriangleSideLength: calc(var(--plus_sideLength) * 2);
+}
+
+.plusButton:focus-visible::before {
+  --plus_topRightTriangleSideLength: calc(var(--plus_sideLength) * 2);
+}
+
+.plusButton>.plusIcon {
+  fill: rgb(0, 0, 0);
+  width: calc(var(--plus_sideLength) * 0.7);
+  height: calc(var(--plus_sideLength) * 0.7);
+  z-index: 1;
+  transition-timing-function: ease-in-out;
+  transition-duration: 0.2s;
+}
+
+.plusButton:hover>.plusIcon {
+  fill: rgb(255, 255, 255);
+  transform: rotate(180deg);
+}
+
+.plusButton:focus-visible>.plusIcon {
+  fill: black;
+  transform: rotate(180deg);
+}
+.button-add {
+  position: relative;
+  width: 150px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border: 1px solid #34974d;
+  background-color: #3aa856;
+  border-radius: 7px;
+}
+
+.button-add, .button__icon, .button__text {
+  transition: all 0.3s;
+  border-radius: 7px;
+}
+
+.button-add .button__text {
+  transform: translateX(30px);
+  color: #fff;
+  font-weight: 600;
+}
+
+.button-add .button__icon {
+  position: absolute;
+  transform: translateX(109px);
+  height: 100%;
+  width: 39px;
+  background-color: #34974d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button-add .svg {
+  width: 30px;
+  stroke: #fff;
+}
+
+.button-add:hover {
+  background: #34974d;
+}
+
+.button-add:hover .button__text {
+  color: transparent;
+}
+
+.button-add:hover .button__icon {
+  width: 148px;
+  transform: translateX(0);
+}
+
+.button-add:active .button__icon {
+  background-color: #2e8644;
+}
+
+.button-add:active {
+  border: 1px solid #2e8644;
+}
+main{
+  margin: 40px 80px 0;
+}
