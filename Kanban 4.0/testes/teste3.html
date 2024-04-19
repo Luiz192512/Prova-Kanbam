@@ -1,24 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kanban Board</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <header>
-        <h1>Kanban Board</h1>
-        <input type="text" id="filter-input" placeholder="Filter Kanbans...">
-        <button id="new-kanban-button">New Kanban</button>
-    </header>
-    <main id="board">
-        <!-- Kanbans will be rendered here -->
-    </main>
-    <footer>
-        <!-- Don't forget to include SortableJS -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/sortable/1.15.0/Sortable.min.js"></script>
-        <script src="scripts.js"></script>
-    </footer>
-</body>
+<html>
+  <head>
+    <title>Customize Trello Board</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">    
+    <script type="application/javascript" src="script2.js"></script>
+  </head>
+  <body>
+    <h1>Customize your new Trello board</h1>
+    <form id="customize-form">
+      <label for="board-title">Board Title:</label><br>
+      <input type="text" id="board-title" name="board-title"><br>
+      <label for="board-background">Board Background:</label><br>
+      <input type="color" id="board-background" name="board-background"><br>
+      <button type="submit">Save Changes</button>
+    </form>
+
+  </body>
 </html>
