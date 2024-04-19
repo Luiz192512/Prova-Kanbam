@@ -9,8 +9,8 @@ const rl = readline.createInterface({
 });
 
 // Chaves de API do Trello
-const apiKey = '96f24f62e0436e0dceeb17149f0431d6';
-const apiToken = 'ATTAad65ccae671d3f7dbfb75ffa9b141f1c3597df1e5cb0b5eaa8d59fcb1fc9f70cF1169CC0';
+const apiKey = 'Key';
+const apiToken = "token";
 
 // Função para criar um quadro (kanban) no Trello
 async function criarQuadro(nomeDoQuadro) {
