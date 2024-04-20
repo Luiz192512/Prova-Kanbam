@@ -1,30 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kanban Board</title>
-    <link rel="stylesheet" href="Kanban.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kanban Board</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1 class="title">Kanban Board</h1>
-        <div class="kanban">
-            <div class="column" id="todo">
-                <h2>To Do</h2>
-                <div class="tasks" id="todo-tasks"></div>
-            </div>
-            <div class="column" id="in-progress">
-                <h2>In Progress</h2>
-                <div class="tasks" id="in-progress-tasks"></div>
-            </div>
-            <div class="column" id="done">
-                <h2>Done</h2>
-                <div class="tasks" id="done-tasks"></div>
-            </div>
-        </div>
-        <button class="new-kanban">New Kanban</button>
-    </div>
-    <script src="Kanban.js"></script>
+  <button id="addTaskBtn">Adicionar Tarefa</button>
+  <div id="kanbanBoard" class="kanban-board"></div>
+
+  <script src="scripts.js"></script>
 </body>
 </html>
