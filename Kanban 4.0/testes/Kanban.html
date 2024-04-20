@@ -1,65 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kanban Board</title>
-    <link rel="stylesheet" href="Kanban.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kanban Board</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="projects-container"></div>
+  <button id="addTaskBtn">Adicionar Tarefa</button>
+  <div id="kanbanBoard" class="kanban-board"></div>
 
-    <script>
-        // Função para recuperar os projetos do armazenamento local
-        function getProjectsFromLocalStorage() {
-            const projectsJSON = localStorage.getItem('projects');
-            return JSON.parse(projectsJSON) || [];
-        }
-
-        // Função para salvar os projetos no armazenamento local
-        function saveProjectsToLocalStorage(projects) {
-            const projectsJSON = JSON.stringify(projects);
-            localStorage.setItem('projects', projectsJSON);
-        }
-
-        // Função para adicionar um novo projeto
-        function addProject(title, backgroundImage) {
-            const projects = getProjectsFromLocalStorage();
-            const newProject = { title, backgroundImage, cards: [] };
-            projects.push(newProject);
-            saveProjectsToLocalStorage(projects);
-            renderProjects();
-        }
-
-        // Função para renderizar os projetos na interface do usuário
-        function renderProjects() {
-            const projectsContainer = document.getElementById('projects-container');
-            projectsContainer.innerHTML = '';
-
-            const projects = getProjectsFromLocalStorage();
-            projects.forEach(project => {
-                const projectElement = document.createElement('div');
-                projectElement.classList.add('project');
-                projectElement.style.backgroundImage = `url('${project.backgroundImage}')`;
-
-                const titleElement = document.createElement('h2');
-                titleElement.textContent = project.title;
-
-                projectElement.appendChild(titleElement);
-                projectsContainer.appendChild(projectElement);
-            });
-        }
-
-        // Exemplo de uso
-        // Ao carregar a página, renderize os projetos existentes
-        window.onload = function() {
-            renderProjects();
-        };
-
-        // Exemplo de como adicionar um novo projeto
-        addProject('Projeto 1', 'imagem1.jpg');
-        addProject('Projeto 2', 'imagem2.jpg');
-        addProject('Projeto 3', 'imagem3.jpg');
-    </script>
+  <script src="scripts.js"></script>
 </body>
 </html>
