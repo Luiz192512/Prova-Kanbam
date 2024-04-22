@@ -8,73 +8,6 @@
     font-family: 'Poppins', sans-serif;
 }
 
-h1{
-  
-}
-
-.btn-outline-success{
-    color: white;
-    border-color: rgb(255, 255, 255);
-}
-.bi-person-circle{
-    color: white;
-    margin-left: 10px;
-}
-.container-search {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 35px;
-  }
-  
-  .input-filter {
-    max-width: 190px;
-    height: 100%;
-    outline: none;
-    font-size: 14px;
-    font-weight: 500;
-    background-color: white;
-    caret-color: #f7f7f8;
-    color: black;
-    padding: 7px 10px;
-    border: 2px solid transparent;
-    border-top-left-radius: 7px;
-    border-bottom-left-radius: 7px;
-    margin-right: 1px;
-    transition: all .2s ease;
-  }
-  
-  .input-filter:hover {
-    border: 2px solid rgba(255, 255, 255, 0.16);
-  }
-  
-  .input-filter:focus {
-    box-shadow: inset 0px 0px 20px rgb(218, 218, 218);
-    border: none;
-
-  }
-  
-  .search__btn {
-    border: none;
-    cursor: pointer;
-    background-color: white;
-    border-top-right-radius: 7px;
-    border-bottom-right-radius: 7px;
-    height: 100%;
-    width: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .search__btn:hover {
-    background-color: rgb(218, 218, 218);
-  }
-
-  .bi-search{
-    color: black;
-  }
-
   a{
     color: white;
     text-decoration: none;
@@ -82,71 +15,9 @@ h1{
 
   /* Note that you only needs to edit the config to customize the button! */
 
-.plusButton {
-  /* Config start */
-  --plus_sideLength: 2.1rem;
-  --plus_topRightTriangleSideLength: 0rem;
-  /* Config end */
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: none;
-  width: var(--plus_sideLength);
-  height: var(--plus_sideLength);
-  background-color: #ffffff;
-  overflow: hidden;
-  margin-right: 10px;
-  border-radius: 7px;
-}
-
-.plusButton::before {
-  position: absolute;
-  content: "";
-  top: 0;
-  right: 0;
-  width: 0;
-  height: 0;
-  border-width: 0 var(--plus_topRightTriangleSideLength) var(--plus_topRightTriangleSideLength) 0;
-  border-style: solid;
-  border-color: transparent rgb(0, 173, 0) transparent transparent;
-  transition-timing-function: ease-in-out;
-  transition-duration: 0.2s;
-}
-
-.plusButton:hover {
-  cursor: pointer;
-}
-
-.plusButton:hover::before {
-  --plus_topRightTriangleSideLength: calc(var(--plus_sideLength) * 2);
-}
-
-.plusButton:focus-visible::before {
-  --plus_topRightTriangleSideLength: calc(var(--plus_sideLength) * 2);
-}
-
-.plusButton>.plusIcon {
-  fill: rgb(0, 0, 0);
-  width: calc(var(--plus_sideLength) * 0.7);
-  height: calc(var(--plus_sideLength) * 0.7);
-  z-index: 1;
-  transition-timing-function: ease-in-out;
-  transition-duration: 0.2s;
-}
-
-.plusButton:hover>.plusIcon {
-  fill: rgb(255, 255, 255);
-  transform: rotate(180deg);
-}
-
-.plusButton:focus-visible>.plusIcon {
-  fill: black;
-  transform: rotate(180deg);
-}
 .button-add {
   position: relative;
-  width: 150px;
+  width: 160px;
   height: 40px;
   cursor: pointer;
   display: flex;
@@ -162,14 +33,14 @@ h1{
 }
 
 .button-add .button__text {
-  transform: translateX(30px);
+  transform: translateX(10px);
   color: #fff;
   font-weight: 600;
 }
 
 .button-add .button__icon {
   position: absolute;
-  transform: translateX(109px);
+  transform: translateX(120px);
   height: 100%;
   width: 39px;
   background-color: #34974d;
@@ -192,7 +63,7 @@ h1{
 }
 
 .button-add:hover .button__icon {
-  width: 148px;
+  width: 100%;
   transform: translateX(0);
 }
 
@@ -205,4 +76,42 @@ h1{
 }
 main{
   margin: 40px 80px 0;
+}
+
+.card {
+  display: inline-block;
+  width: 160px;
+  height: 100px;
+  background-color: #2e8644;
+  border-radius: 7px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border: none;
+  margin-bottom: 10px;
+  color: #fff;
+  font-weight: bolder;
+  margin-right: 10px;
+  text-wrap: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.top {
+  border-radius: 7px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  width: 140px;
+  height: 10px;
+}
+
+.title {
+  color: #fff;
+  margin-left: 10px;
+  margin-top: 70px;
+  margin-right: 10px;
+  text-wrap: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.kanban-list{
+  display: inline;
 }

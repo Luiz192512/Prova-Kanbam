@@ -8,6 +8,7 @@
     <link rel="shortcut icon" href="Img/Logo2.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/navbar2.css">
     <link rel="stylesheet" href="css/MK.css">
+    <link rel="stylesheet" href="css/Modal.css">
     
 </head>
 <body>
@@ -19,7 +20,7 @@
       <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="navbar-collapse collapse" id="navbarSupportedContent" style="">
+      <div class="navbar-collapse collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="Index.html">Introdução</a>
@@ -57,9 +58,10 @@
       <main>
         <div class="containerCK">
           <h1>Seus Kanbans:</h1>
-          <a href="EditarKanban.html">
-          <button type="button" class="button-add">
-            <span class="button__text">Add Item</span>
+          <div class="kanban-list">
+          </div>
+          <button type="button" class="button-add" id="createKanbanBtn">
+            <span class="button__text" >Criar Kanban</span>
             <span class="button__icon">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" height="24" fill="none" class="svg">
                 <line y2="19" y1="5" x2="12" x1="12"></line>
@@ -67,9 +69,18 @@
               </svg>
             </span>
           </button>
-        </a>
+          <div id="myModal" class="modal">
+            <div class="modal-content">
+              <span class="close" style="cursor: pointer;">&times;</span>
+              <input type="text" id="kanbanNameInput" placeholder="Nome do Kanban">
+              <button id="createKanbanModalBtn">Criar</button>
+            </div>
+          </div>
         </div>
       </main>
+      
+      <script src="js/CriarKanban.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
