@@ -89,3 +89,24 @@ header{
     display: flex;
     flex-direction: column;
 }
+
+.fa-pencil-alt{
+    width: 20px;
+    background-color: white;
+    border: none;
+}
+button.btn-editar-tarefa {
+    border: none;
+    background-color: white;
+}
+
+.fa-lixeira{
+    width: 20px;
+    background-color: white;
+
+}
+
+button.btn-excluir-tarefa {
+    border: none;
+    background-color: white;
+}

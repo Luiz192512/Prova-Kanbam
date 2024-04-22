@@ -61,23 +61,6 @@ document.querySelectorAll('.kanban-card').forEach(function(card) {
   });
 });
 
-// Inicializar o SortableJS para tornar as tarefas arrastáveis entre as colunas
-function iniciarSortable() {
-new Sortable(document.getElementById('fazer-tarefas'), {
-  group: 'kanban',
-  animation: 150
-});
-
-new Sortable(document.getElementById('emprogresso-tarefas'), {
-  group: 'kanban',
-  animation: 150
-});
-
-new Sortable(document.getElementById('concluido-tarefas'), {
-  group: 'kanban',
-  animation: 150
-});
-}
     var kanbanCards = JSON.parse(localStorage.getItem('kanbanCards')) || [];
     var kanbanList = document.querySelector('.kanban-list');
 
@@ -107,7 +90,17 @@ new Sortable(document.getElementById('concluido-tarefas'), {
 window.onload = function() {
     carregarCardsKanban();
 };
+// Seleciona o elemento de fechamento do modal
+const closeBtn = document.querySelector('.close');
 
+// Adiciona um evento de clique ao elemento
+closeBtn.addEventListener('click', () => {
+  // Seleciona o modal
+  const modal = document.getElementById('myModal');
+
+  // Esconde o modal
+  modal.style.display = 'none';
+});
 // Função para exibir o modal e criar o kanban
 document.getElementById('createKanbanBtn').addEventListener('click', function() {
     console.log("Exibindo modal...");

@@ -8,26 +8,70 @@ function excluirTarefa(coluna, index) {
 // Carrega as tarefas do localStorage ou inicializa um objeto vazio se não houver tarefas salvas
 let tarefas = JSON.parse(localStorage.getItem('tarefas-kaban')) || { fazer: [], emprogresso: [], concluido: [] };
 
-// Função para permitir que um elemento seja solto em outro elemento
-function allowDrop(ev) {
-    ev.preventDefault();
+// Seleciona todas as colunas
+const columns = document.querySelectorAll(".tarefas");
+
+// Adiciona event listener para iniciar o arrastar
+document.addEventListener("dragstart", (e) => {
+  e.target.classList.add("dragging");
+});
+
+// Adiciona event listener para finalizar o arrastar
+document.addEventListener("dragend", (e) => {
+  e.target.classList.remove("dragging");
+});
+
+// Adiciona event listener para arrastar sobre as colunas
+columns.forEach((column) => {
+  column.addEventListener("dragover", (e) => {
+    e.preventDefault(); // Evita o comportamento padrão de não permitir soltar
+    const dragging = document.querySelector(".dragging");
+    const applyAfter = getNewPosition(column, e.clientY);
+
+    if (applyAfter) {
+      applyAfter.insertAdjacentElement("afterend", dragging);
+    } else {
+      column.prepend(dragging);
+    }
+  });
+});
+
+// Função para determinar a nova posição do elemento
+function getNewPosition(column, posY) {
+  const cards = column.querySelectorAll(".item:not(.dragging)");
+  let result;
+
+  for (let card of cards) {
+    const box = card.getBoundingClientRect();
+    const boxCenterY = box.y + box.height / 2;
+
+    if (posY >= boxCenterY) {
+      result = card;
+    }
   }
-  
-  // Função para definir o que será arrastado
-  function drag(ev) {
-    ev.dataTransfer.setData("text/html", ev.target);
-  }
-  
-  // Função para definir onde o elemento será solto
-  function drop(ev) {
-    ev.preventDefault();
-    var data = ev.dataTransfer.getData("text/html");
-    // Evita a anexação de texto diretamente; em vez disso, cria um elemento e anexa
-    var dataElement = document.createElement("div");
-    dataElement.innerHTML = data;
-    ev.target.appendChild(dataElement.firstChild); // Adiciona o primeiro filho do elemento criado
+
+  return result;
 }
 
+// Adiciona event listener para soltar o elemento
+columns.forEach((column) => {
+  column.addEventListener("drop", (e) => {
+    e.preventDefault(); // Evita o comportamento padrão de não permitir soltar
+    const dragging = document.querySelector(".dragging");
+    const columnId = column.id; // Obtém o ID da coluna
+    const taskTitle = dragging.querySelector(".task-title").innerText; // Obtém o título da tarefa
+
+    // Salva a tarefa na coluna correta
+    const tasks = JSON.parse(localStorage.getItem(columnId)) || [];
+    tasks.push(taskTitle);
+    localStorage.setItem(columnId, JSON.stringify(tasks));
+
+    dragging.remove(); // Remove o elemento arrastado da lista
+  });
+});
+
+
+// Função para renderizar as tarefas na interface
 // Função para renderizar as tarefas na interface
 // Função para renderizar as tarefas na interface
 function renderizarTarefas() {
@@ -42,15 +86,30 @@ function renderizarTarefas() {
                     const tarefaElement = document.createElement('div');
                     tarefaElement.classList.add('tarefa');
                     tarefaElement.draggable = true;
-                    tarefaElement.ondragstart = drag;
                     tarefaElement.innerHTML = `<div class="tarefa-titulo">${tarefa.titulo}</div>
                                                <div class="tarefa-descricao">${tarefa.descricao || ''}</div>
-                                               <button class="btn-excluir-tarefa" onclick="excluirTarefa('${coluna}', ${index})">Excluir</button>`;
+                                               <button class="btn-excluir-tarefa" onclick="excluirTarefa('${coluna}', ${index})"><img src="Img/lixeira.png" class="fa-lixeira"></img>></button>
+                                               <button class="btn-editar-tarefa" onclick="editarTarefa('${coluna}', ${index})"><img src="Img/ferramenta-lapis.png" class="fa-pencil-alt"></img></button>`; // Ícone de lápis
                     colunaElement.appendChild(tarefaElement);
                 }
             });
         }
     });
+}
+
+
+// Função para editar uma tarefa
+function editarTarefa(coluna, index) {
+    const novoTitulo = prompt("Digite o novo título da tarefa:");
+    const novaDescricao = prompt("Digite a nova descrição da tarefa:");
+    
+    // Verifica se o usuário não cancelou a edição e atualiza os valores da tarefa
+    if (novoTitulo !== null && novaDescricao !== null) {
+        tarefas[coluna][index].titulo = novoTitulo;
+        tarefas[coluna][index].descricao = novaDescricao;
+        localStorage.setItem('tarefas-kaban', JSON.stringify(tarefas));
+        renderizarTarefas();
+    }
 }
 
 
@@ -115,6 +174,11 @@ document.addEventListener("DOMContentLoaded", function() {
         tarefasDiv.appendChild(tarefaElement);
       });
     }
+  });
+
+  document.addEventListener("DOMContentLoaded", function() {
+    const titulo = document.querySelector('.titulo');
+    titulo.textContent = nomeCategoria;
   });
 // Verifica se o nome da categoria foi inserido na URL como parâmetro
 const params = new URLSearchParams(window.location.search);
