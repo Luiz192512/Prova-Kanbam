@@ -58,17 +58,17 @@
   <div class="quadro-kanban">
     <div class="coluna-kanban fazer">
       <div class="coluna-cabecalho">Por Fazer</div>
-      <div class="tarefas" id="fazer-tarefas"></div>
+      <div class="tarefas" id="fazer-tarefas" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
       <button class="btn-adicionar-tarefas" data-column="fazer">+ Adicionar Tarefa</button>
     </div>
     <div class="coluna-kanban em-progresso">
       <div class="coluna-cabecalho">Em Progresso</div>
-      <div class="tarefas" id="emprogresso-tarefas"></div>
+      <div class="tarefas" id="emprogresso-tarefas" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
       <button class="btn-adicionar-tarefas" data-column="emprogresso">+ Adicionar Tarefa</button>
     </div>
     <div class="coluna-kanban concluido">
       <div class="coluna-cabecalho">Concluído</div>
-      <div class="tarefas" id="concluido-tarefas"></div>
+      <div class="tarefas" id="concluido-tarefas" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
       <button class="btn-adicionar-tarefas" data-column="concluido">+ Adicionar Tarefa</button>
     </div>
   </div>
@@ -83,8 +83,6 @@
       <button onclick="document.getElementById('modal-tarefa').style.display='none'">Cancelar</button>
     </div>
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.14.0/Sortable.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable/lib/draggable.bundle.umd.min.js"></script>
   <script src="js/kanban2.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

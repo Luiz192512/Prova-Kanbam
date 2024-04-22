@@ -8,6 +8,26 @@ function excluirTarefa(coluna, index) {
 // Carrega as tarefas do localStorage ou inicializa um objeto vazio se não houver tarefas salvas
 let tarefas = JSON.parse(localStorage.getItem('tarefas-kaban')) || { fazer: [], emprogresso: [], concluido: [] };
 
+// Função para permitir que um elemento seja solto em outro elemento
+function allowDrop(ev) {
+    ev.preventDefault();
+  }
+  
+  // Função para definir o que será arrastado
+  function drag(ev) {
+    ev.dataTransfer.setData("text/html", ev.target);
+  }
+  
+  // Função para definir onde o elemento será solto
+  function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text/html");
+    // Evita a anexação de texto diretamente; em vez disso, cria um elemento e anexa
+    var dataElement = document.createElement("div");
+    dataElement.innerHTML = data;
+    ev.target.appendChild(dataElement.firstChild); // Adiciona o primeiro filho do elemento criado
+}
+
 // Função para renderizar as tarefas na interface
 // Função para renderizar as tarefas na interface
 function renderizarTarefas() {
@@ -22,9 +42,7 @@ function renderizarTarefas() {
                     const tarefaElement = document.createElement('div');
                     tarefaElement.classList.add('tarefa');
                     tarefaElement.draggable = true;
-                    tarefaElement.ondragstart = () => drag(event, tarefaElement);
-                    tarefaElement.ondrop = drop;
-                    tarefaElement.ondragover = allowDrop;
+                    tarefaElement.ondragstart = drag;
                     tarefaElement.innerHTML = `<div class="tarefa-titulo">${tarefa.titulo}</div>
                                                <div class="tarefa-descricao">${tarefa.descricao || ''}</div>
                                                <button class="btn-excluir-tarefa" onclick="excluirTarefa('${coluna}', ${index})">Excluir</button>`;
@@ -35,21 +53,6 @@ function renderizarTarefas() {
     });
 }
 
-
-// Add these event handlers
-function allowDrop(ev) {
-    ev.preventDefault();
-}
-
-function drag(ev, element) {
-    ev.dataTransfer.setData(".tarefas", element.id);
-}
-
-function drop(ev) {
-    let data = ev.dataTransfer.getData(".tarefas");
-    ev.target.appendChild(document.getElementById(data));
-    ev.preventDefault();
-}
 
 // Função para adicionar uma nova tarefa
 function adicionarTarefa(coluna) {
