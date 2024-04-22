@@ -60,33 +60,66 @@
           <button onclick="document.getElementById('modal-tarefa').style.display='none'">Cancelar</button>
       </div>
   </div>
-      <script src="/Sesi-Provas-1Tri-main/quadro kanban/js/script.js"></script>
-</body>
-=======
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Create and Save File</title>
-  <script>
-    function createFile() {
-      const title = document.getElementById("titleInput").value;
-      const content = "This is the content of the file.";
-      const blob = new Blob([content], {type: "text/plain;charset=utf-8"});
-      saveAs(blob, title + ".html");
-    }
+      <script>
+          let tarefas = JSON.parse(localStorage.getItem('tarefas-kaban')) || { fazer: [], emprogresso: [], concluido: [] };
 
-    function saveAs(blob, fileName) {
-      const link = document.createElement("a");
-      link.href = URL.createObjectURL(blob);
-      link.download = fileName;
-      link.click();
-    }
-  </script>
-</head>
-<body>
-  <h1>Create and Save File</h1>
-  <input type="text" id="titleInput" placeholder="Enter file title" />
-  <button onclick="createFile()">Create File</button>
+function renderizarTarefas() {
+    Object.keys(tarefas).forEach(coluna => {
+        const colunaElement = document.getElementById(`${coluna}-tarefas`);
+        colunaElement.innerHTML = ''; // Limpa a coluna antes de adicionar tarefas
+        tarefas[coluna].forEach(tarefa => {
+            if (tarefa !== null) { // Add this null check
+                const tarefaElement = document.createElement('div');
+                tarefaElement.classList.add('tarefa');
+                tarefaElement.draggable = true
+                tarefaElement.ondragstart = () => drag(event, tarefaElement);
+                tarefaElement.ondrop = drop;
+                tarefaElement.ondragover = allowDrop;
+                tarefaElement.innerHTML = `<div class="tarefa-titulo">${tarefa.titulo}</div>
+                                           <div class="tarefa-descricao">${tarefa.descricao || ''}</div>`;
+                colunaElement.appendChild(tarefaElement);
+            }
+        });
+    });
+}
+
+// Add these event handlers
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function drag(ev, element) {
+    ev.dataTransfer.setData(".tarefas", element.id);
+}
+
+function drop(ev) {
+    let data = ev.dataTransfer.getData(".tarefas");
+    ev.target.appendChild(document.getElementById(data));
+    ev.preventDefault();
+}
+
+document.querySelectorAll('.btn-adicionar-tarefas').forEach(button => {
+    button.addEventListener('click', function() {
+        const coluna = this.getAttribute('data-column');
+        document.getElementById('modal-tarefa').style.display = 'block';
+        document.getElementById('btn-salvar-tarefa').onclick = function() {
+            adicionarTarefa(coluna);
+        };
+    });
+});
+
+function adicionarTarefa(coluna) {
+    const titulo = document.getElementById('titulo-tarefa').value;
+    const descricao = document.getElementById('descricao-tarefa').value;
+    const novaTarefa = { titulo, descricao };
+    tarefas[coluna].push(novaTarefa);
+    localStorage.setItem('tarefas-kaban', JSON.stringify(tarefas));
+    document.getElementById('modal-tarefa').style.display = 'none';
+    renderizarTarefas();
+}
+
+renderizarTarefas();
+
+      </script>
 </body>
->>>>>>> e3af80272682649408ee711e2d96127756e8a3ce
 </html>
