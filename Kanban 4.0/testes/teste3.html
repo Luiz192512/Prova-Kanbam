@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<<<<<<< HEAD
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analisar Local Storage</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Tabela de Dados do Local Storage</h2>
+
+<table id="tabelaDados">
+    <thead>
+        <tr>
+            <th>Chave</th>
+            <th>Valor</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Os dados serão adicionados aqui dinamicamente -->
+    </tbody>
+</table>
+
+<script>
+    // Função para carregar e exibir os dados do Local Storage em uma tabela
+    function exibirDadosLocalStorage() {
+        const tabelaDados = document.getElementById('tabelaDados');
+        const tbody = tabelaDados.getElementsByTagName('tbody')[0];
+        tbody.innerHTML = ''; // Limpa o conteúdo atual da tabela
+
+        // Itera sobre os itens do Local Storage
+        for (let i = 0; i < localStorage.length; i++) {
+            const chave = localStorage.key(i);
+            const valor = localStorage.getItem(chave);
+
+            // Cria uma nova linha na tabela com a chave e o valor
+            const newRow = tbody.insertRow();
+            const cell1 = newRow.insertCell(0);
+            const cell2 = newRow.insertCell(1);
+            cell1.textContent = chave;
+            cell2.textContent = valor;
+        }
+    }
+
+    // Chama a função para exibir os dados ao carregar a página
+    exibirDadosLocalStorage();
+</script>
+
+</body>
+</html>
+=======
+<html>
+  <head>
+    <title>Customize Trello Board</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">    
+    <script type="application/javascript" src="script2.js"></script>
+  </head>
+  <body>
+    <h1>Customize your new Trello board</h1>
+    <form id="customize-form">
+      <label for="board-title">Board Title:</label><br>
+      <input type="text" id="board-title" name="board-title"><br>
+      <label for="board-background">Board Background:</label><br>
+      <input type="color" id="board-background" name="board-background"><br>
+      <button type="submit">Save Changes</button>
+    </form>
+
+  </body>
+</html>
+>>>>>>> e3af80272682649408ee711e2d96127756e8a3ce

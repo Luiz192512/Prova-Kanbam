@@ -1,0 +1,92 @@
+<<<<<<< HEAD
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Kanban</title>
+    <link rel="stylesheet" href="/Sesi-Provas-1Tri-main/quadro kanban/css/style.css">
+    <link rel="stylesheet" href="/Sesi-Provas-1Tri-main/quadro kanban/css/style.css">
+    <style>
+      .tarefa {
+          border: 1px solid #ccc;
+          margin-bottom: 5px;
+          padding: 5px;
+          background-color: #f9f9f9;
+          cursor: grab;
+      }
+  </style>
+</head>
+
+<body>
+  <div id="container1" style="display: block;">
+      <h1>Create and Save File</h1>
+      <input type="text" id="titleInput" placeholder="Enter Kanban Title" />
+      <button onclick="document.getElementById('container2').style.display='block'; document.getElementById('container1').style.display='none'">Criar Kanban</button>
+      <button><a href="MeusKanban.html">Cancelar</a></button>
+  </div>
+  <div id="container2" style="display: none;">
+    <nav class="NomeKanban">
+        <h3>Quadro Kanban</h3>
+    </nav>
+
+    <div class="quadro-kanban">
+      <div class="coluna-kanban fazer">
+          <div class="coluna-cabecalho">Por Fazer</div>
+          <div class="tarefas" id="fazer-tarefas" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+          <button class="btn-adicionar-tarefas" data-column="fazer">+ Adicionar Tarefa</button>
+      </div>
+      <div class="coluna-kanban em-progresso">
+          <div class="coluna-cabecalho">Em Progresso</div>
+          <div class="tarefas" id="emprogresso-tarefas" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+          <button class="btn-adicionar-tarefas" data-column="emprogresso">+ Adicionar Tarefa</button>
+      </div>
+      <div class="coluna-kanban concluido">
+          <div class="coluna-cabecalho">Concluído</div>
+          <div class="tarefas" id="concluido-tarefas" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+          <button class="btn-adicionar-tarefas" data-column="concluido">+ Adicionar Tarefa</button>
+      </div>
+  </div>
+
+  
+
+  <!-- Modal para adicionar/editar tarefa -->
+  <div class="modal" id="modal-tarefa" style="display:none;">
+      <div class="modal-content">
+          <h3 id="titulo-modal">Adicionar Tarefa</h3>
+          <input type="text" id="titulo-tarefa" placeholder="Título da Tarefa" required>
+          <textarea id="descricao-tarefa" placeholder="Descrição da Tarefa"></textarea>
+          <button id="btn-salvar-tarefa">Salvar Tarefa</button>
+          <button onclick="document.getElementById('modal-tarefa').style.display='none'">Cancelar</button>
+      </div>
+  </div>
+      <script src="/Sesi-Provas-1Tri-main/quadro kanban/js/script.js"></script>
+</body>
+=======
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Create and Save File</title>
+  <script>
+    function createFile() {
+      const title = document.getElementById("titleInput").value;
+      const content = "This is the content of the file.";
+      const blob = new Blob([content], {type: "text/plain;charset=utf-8"});
+      saveAs(blob, title + ".html");
+    }
+
+    function saveAs(blob, fileName) {
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = fileName;
+      link.click();
+    }
+  </script>
+</head>
+<body>
+  <h1>Create and Save File</h1>
+  <input type="text" id="titleInput" placeholder="Enter file title" />
+  <button onclick="createFile()">Create File</button>
+</body>
+>>>>>>> e3af80272682649408ee711e2d96127756e8a3ce
+</html>
